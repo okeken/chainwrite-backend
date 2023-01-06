@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
+  console.log("connecting!!!! ")
   try {    
     mongoose.set('strictQuery', true)
     // console.log("DB!!!",process.env.DB_CREDENTIALS )

@@ -1,6 +1,6 @@
 import { Request, NextFunction} from "express"
 
-interface IResult  {
+export interface IResult  {
   limit:number
   prev:number | null
   next:number | null

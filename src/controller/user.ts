@@ -1,6 +1,6 @@
 import {Request, Response} from "express"
 import userDb from "../model/user"
-import {userStatus} from "../enum"
+import { userStatus } from "../enum"
 
 
 export const allUsers= async(req:Request, res:Response)=>{
@@ -15,7 +15,9 @@ export const allUsers= async(req:Request, res:Response)=>{
 }
 
 export const checkUserStatus = async (req:Request, res:Response)=>{
-    const {address} = req.params
+   
+    const address = req.user   
+   
     try{
         const isUserAv = await userDb.findOne({address})
         if(!isUserAv){
@@ -29,7 +31,10 @@ export const checkUserStatus = async (req:Request, res:Response)=>{
         })
     }
     catch(e){
-
+  return res.status(500).json({
+    status:"failed",
+    error:e
+  })
     }
 }
 
