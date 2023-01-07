@@ -18,7 +18,7 @@ async function main(){
   await connectDB()
 app.use(express.json());
 const corsOption = {
-  origin: 'http://localhost:3000',
+  origin: 'https://www.chainwrite.xyz',
   optionsSuccessStatus:200
 };
 
