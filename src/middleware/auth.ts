@@ -36,7 +36,7 @@ const authenticate = (req: Request, res: any, next: NextFunction) => {
         return next(new Error('expired token'))
        }
        
-       req.user = decodedToken.id        
+       req.user = decodedToken?.id?.toLocaleLowerCase()        
       next();
     }
     catch(e){
