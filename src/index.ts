@@ -16,14 +16,15 @@ const port = process.env.PORT || 8000;
 
 async function main(){
   await connectDB()
+
+app.use(cors());
+app.options('*', cors());
 app.use(express.json());
+
 const corsOption = {
   origin: 'https://www.chainwrite.xyz',
   optionsSuccessStatus:200
 };
-
-app.use(cors(corsOption));
-app.options('*', cors());
 app.use(express.raw({type: "application/json"}));
 app.use(express.json({strict: false}));
 app.use(express.urlencoded({extended: false})); // include this line
