@@ -6,6 +6,7 @@ import cookiesRouter from './route/cookies';
 import connectDB from './config/database';
 import userRouter from './route/user';
 import postRouter from './route/post';
+import videoRouter from "./route/video"
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use("/", indexRouter)
 app.use("/cookies", cookiesRouter)
 app.use("/user", userRouter)
 app.use("/post", postRouter)
+app.use("/video", videoRouter)
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

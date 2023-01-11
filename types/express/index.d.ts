@@ -2,7 +2,7 @@
 
 declare module Express {
     interface Request {
-        user?:String
+        user?:String        
 }
 //     interface Response {
 //         paginated?:IResult 

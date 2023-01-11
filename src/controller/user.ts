@@ -16,12 +16,10 @@ export const allUsers= async(req:Request, res:Response)=>{
 
 export const checkUserStatus = async (req:Request, res:Response)=>{
    
-    const address = req.user 
-    console.log(address, "user adress!!!!")  
+    const address = req.user   
    
     try{
         const isUserAv = await userDb.findOne({address})
-        console.log(isUserAv, "user boj")
         if(!isUserAv){
             return res.status(200).json({
                 status:userStatus.NotAvailable
