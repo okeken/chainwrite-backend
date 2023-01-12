@@ -13,7 +13,15 @@ const usersSchema = new Schema(
       default:userStatus.NotAvailable,
         type:Number,
         enum:userStatus
-    } 
+    },
+    optedIn:{
+      default:false,
+      type:Boolean
+    },
+    handle:{
+    type:String
+    }, 
+    
   },
 
   { timestamps: true }

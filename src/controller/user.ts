@@ -20,6 +20,7 @@ export const checkUserStatus = async (req:Request, res:Response)=>{
    
     try{
         const isUserAv = await userDb.findOne({address})
+        console.log(isUserAv)
         if(!isUserAv){
             return res.status(200).json({
                 status:userStatus.NotAvailable
@@ -27,7 +28,10 @@ export const checkUserStatus = async (req:Request, res:Response)=>{
         }
 
         return res.status(200).json({
-            status:isUserAv.status
+            // status:isUserAv.status,
+             // @ts-ignore
+        ...isUserAv?._doc,        
+
         })
     }
     catch(e){
@@ -41,16 +45,20 @@ export const checkUserStatus = async (req:Request, res:Response)=>{
 export const createUser =async (req:Request, res:Response)=>{
  
    try{
-    const {address} = req.params    
+    const {address} = req.params  
+    const {handle} = req.body  
     const newUser =  new userDb({
         address,
-       status:userStatus.isPending
+       status:userStatus.isPending,
+       handle
     })
     
-   await newUser.save()
+ const saved =  await newUser.save()
     return  res.status(201).json({
         message:'success',
-       status:userStatus.isPending
+        // @ts-ignore
+        ...saved?._doc
+      //  status:userStatus.isPending
     })
    }
    catch(e){}
@@ -89,3 +97,37 @@ export const updateUser = async(req:Request, res:Response)=>{
     })
   }
 }
+
+
+export const optIn = async(req:Request, res:Response)=>{
+  const {address} = req.params  
+  try{
+      const findItem = await userDb.updateOne(
+        { address },
+        { $set: {
+          optedIn:true        
+        } 
+      }
+      )
+
+     
+      if(!findItem){
+        res.status(200).json({
+          status:userStatus.NotAvailable,
+          message:"user not found"
+        })
+      }
+
+      return res.status(201).json({
+       status:userStatus.isAvailable        
+      })
+}
+catch(e){
+  return res.status(500).json({
+    status:false,
+    message:"Server error",
+    error:e
+  })
+}
+}
+
