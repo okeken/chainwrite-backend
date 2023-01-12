@@ -49,7 +49,7 @@ export const createUser =async (req:Request, res:Response)=>{
     const {handle} = req.body  
     const newUser =  new userDb({
         address,
-       status:userStatus.isPending,
+       status:userStatus.isAvailable,
        handle
     })
     
