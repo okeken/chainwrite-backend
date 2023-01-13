@@ -5,10 +5,10 @@ import authenticate from "../middleware/auth"
 const userRouter = express.Router();
 
 userRouter.get('/',allUsers);
+userRouter.get('/:address',  checkUserStatus);
 userRouter.use(authenticate)
 userRouter.post("/:address", createUser)
 userRouter.put("/:address", updateUser)
-userRouter.get('/:address',  checkUserStatus);
 
 
 export default userRouter;
