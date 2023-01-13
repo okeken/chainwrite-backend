@@ -1,11 +1,10 @@
 import express from "express"
+import {prepareVideo} from "../controller/video"
 
 const videoRouter = express.Router()
 
 videoRouter
-.get("/", (req,res)=>{
-    console.log(req, res)
-})
+.get("/:name", prepareVideo)
 
 
 export default videoRouter

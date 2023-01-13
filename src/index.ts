@@ -34,7 +34,7 @@ app.use("/", indexRouter)
 app.use("/cookies", cookiesRouter)
 app.use("/user", userRouter)
 app.use("/post", postRouter)
-app.use("/video", videoRouter)
+app.use("/prepare-video", videoRouter)
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
