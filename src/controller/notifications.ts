@@ -14,6 +14,8 @@ export const sendNotification = async (req:Request,res:Response) => {
     const signer = await getSigner()
     const payload = req.body
     const address = req.params.address
+    
+  
 
     const {
       notTitle ,
@@ -26,6 +28,14 @@ export const sendNotification = async (req:Request,res:Response) => {
         message:'all fields are required'
       })
     }
+
+    if((req.user!.toLocaleLowerCase()) == receiver.toLocaleLowerCase()){
+      return res.status(200).json({
+        data:204,
+        status:"success"
+      })      
+    }
+
     try {
       const apiResponse = await PushAPI.payloads.sendNotification({
         signer,
