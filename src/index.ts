@@ -7,12 +7,12 @@ import connectDB from './config/database';
 import userRouter from './route/user';
 import postRouter from './route/post';
 import videoRouter from "./route/video"
+import notificationsRouter from "./route/notifications"
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 8000;
-
 
 
 async function main(){
@@ -35,6 +35,7 @@ app.use("/cookies", cookiesRouter)
 app.use("/user", userRouter)
 app.use("/post", postRouter)
 app.use("/prepare-video", videoRouter)
+app.use("/notifications", notificationsRouter)
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

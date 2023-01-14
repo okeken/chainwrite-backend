@@ -74,7 +74,8 @@ export const updateUser = async (req: Request, res: Response) => {
       { address },
       {
         $set: {
-          status: userStatus.isAvailable
+          status: userStatus.isAvailable,
+          ...req.body
         }
       }
     )
@@ -101,14 +102,15 @@ export const updateUser = async (req: Request, res: Response) => {
 }
 
 
-export const optIn = async (req: Request, res: Response) => {
+export const subscriptions = async (req: Request, res: Response) => {
   const { address } = req.params
+  const {optedIn=true} = req.body
   try {
     const findItem = await userDb.updateOne(
       { address },
       {
         $set: {
-          optedIn: true
+          optedIn
         }
       }
     )
